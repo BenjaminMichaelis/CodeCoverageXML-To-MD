@@ -1,0 +1,15 @@
+name: 'Generate Coverage Report MD from XML'
+description: 'Generate a coverage report MD from a Cobertura XML file'
+inputs:
+  coverage-file:
+    description: 'Path to the Cobertura XML file'
+    required: true
+  output-file:
+    description: 'Path to the output Markdown file'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - run: |
+        pwsh -File ./CoverageXmlToMd.ps1 -coverageFile '${{ inputs.coverage-file }}' -outputFile '${{ inputs.output-file }}'
+      shell: pwsh
